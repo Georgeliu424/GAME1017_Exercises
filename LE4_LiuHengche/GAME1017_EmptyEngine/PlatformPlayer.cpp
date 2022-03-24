@@ -102,8 +102,7 @@ void PlatformPlayer::Update()
 
 void PlatformPlayer::Render()
 {
-	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 255, 0, 255, 255);
-	SDL_RenderFillRectF(Engine::Instance().GetRenderer(), &m_dst);
+	SDL_RenderCopyExF(m_pRend, m_pText, GetSrcP(), GetDstP(), m_angle, 0, static_cast<SDL_RendererFlip>(m_dir));
 }
 
 void PlatformPlayer::Stop()
