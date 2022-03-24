@@ -109,6 +109,39 @@ void GameState::Update()
 		i.second->Update();
 		if (STMA::StateChanging()) return;
 	}
+
+	PlatformPlayer* pObj = static_cast<PlatformPlayer*>(GetGo("player"));
+	SDL_FRect* pBound = pObj->GetDst();
+	TiledLevel* pLevel = static_cast<TiledLevel*>(GetGo("level"));
+	for (unsigned int i = 0; i < pLevel->GetObstacles().size(); i++)
+	{
+		SDL_FRect* pTile = pLevel->GetObstacles()[i]->GetDst();
+		if (COMA::AABBCheck(*pBound, *pTile))
+		{
+			if ((pBound->y + pBound->h) - (float)pObj->GetVelY() <= pTile->y)
+			{
+				pObj->StopY();
+				pObj->SetY(pTile->y - pBound->h);
+				pObj->SetGrounded(true);
+			}
+			else if (pBound->y - (float)pObj->GetVelY() >= (pTile->y + pTile->h))
+			{
+				pObj->StopY();
+				pObj->SetY(pTile->y + pTile->h);
+			}
+			else if ((pBound->x + pBound->w) - (float)pObj->GetVelX() <= pTile->x)
+			{
+				pObj->StopX();
+				pObj->SetX(pTile->x - pBound->w);
+			}
+			else if (pBound->x - (float)pObj->GetVelX() >= (pTile->x + pTile->w))
+			{
+				pObj->StopX();
+				pObj->SetX(pTile->x + pTile->w);
+			}
+
+		}
+	}
 }
 
 void GameState::Render()
