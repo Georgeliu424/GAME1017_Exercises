@@ -32,7 +32,7 @@ private:
 	bool m_isGrounded, m_isFacingLeft;
 	double m_accelX, m_accelY,
 		m_velX, m_velY,
-		m_maxVelx, m_maxVelY,
+		m_maxVelX, m_maxVelY,
 		m_drag, m_grav;
 	PlayerState m_state;
 };
