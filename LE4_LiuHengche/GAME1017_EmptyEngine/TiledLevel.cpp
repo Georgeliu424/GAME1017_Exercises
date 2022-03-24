@@ -23,7 +23,7 @@ TiledLevel::TiledLevel(const unsigned short r, const unsigned short c, const int
 		m_level.resize(m_rows);
 		for (unsigned short row = 0; row < m_rows; row++)
 		{
-			m_level.resize(m_cols);
+			m_level[row].resize(m_cols);
 			for (unsigned short col = 0; col< m_cols; col++)
 			{
 				inFile >> key;
@@ -73,12 +73,11 @@ TiledLevel::~TiledLevel()
 	m_tiles.clear();
 }
 
-void TiledLevel::Render()
+	void TiledLevel::Render()
 {
-	for (unsigned short row = 0; row < m_rows; row++)
+	  for (unsigned short row = 0; row < m_rows; row++)
 
 	{
-
 		for (unsigned short col = 0; col < m_cols; col++)
 
 		{

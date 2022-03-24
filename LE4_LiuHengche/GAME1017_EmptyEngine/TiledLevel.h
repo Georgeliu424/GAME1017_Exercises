@@ -29,8 +29,8 @@ class TiledLevel : public GameObject
 public:
 	TiledLevel(const unsigned short r,const unsigned short c, const int w,const int h, const char*tiledata,const char*levelData,const char*tilekey);
 	~TiledLevel();
-	void Update() {};
-	void Render() {};
+	void Update(){};
+	void Render();
 	vector<Tile*>& GetObstacles() { return m_obstacles; }
 private:
 	const char* m_tileKey;
