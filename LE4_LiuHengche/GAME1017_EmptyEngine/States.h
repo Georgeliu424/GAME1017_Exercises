@@ -4,6 +4,7 @@
 
 #include "TiledLevel.h"
 #include "GameObject.h"
+#include"PlatformPlayer.h"
 
 class State // This is the abstract base class for all states
 {

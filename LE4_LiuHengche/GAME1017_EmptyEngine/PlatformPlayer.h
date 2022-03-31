@@ -3,6 +3,7 @@
 #define _PLATFORMPLAYER_H_
 
 #include "GameObject.h"
+#include"SDL.h"
 #define GRAVITY 2.0
 #define JUMPFORCE 25.0
 
@@ -36,12 +37,8 @@ private:
 		m_maxVelX, m_maxVelY,
 		m_drag, m_grav;
 	PlayerState m_state;
-	SDL_Renderer* m_pRend;
-	SDL_Rect* GetSrcP() { return &m_src; }
-	SDL_FRect* GetDstP() { return &m_dst; }
-	SDL_Texture* m_pText;
-	bool m_dir;
-	double m_angle;
+	
+	
 
 };
 

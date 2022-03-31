@@ -7,7 +7,7 @@
 #include "SoundManager.h"
 #include "Primitives.h"
 #include "Button3.h"
-#include"PlatformPlayer.h"
+
 
 #include <iostream>
 using namespace std;
@@ -94,8 +94,8 @@ void GameState::Enter() // Used for initialization.
 	TEMA::Load("Img/Player.png", "player");
 	m_objects.push_back(pair<string, GameObject*>("level", new TiledLevel(
 		24, 32, 32, 32, "Dat/Tiledata.txt", "Dat/Level1.txt", "tiles")));
-	m_objects.push_back(pair<string, GameObject*>("player", new PlatformPlayer({0, 0, 0, 0
-		}, {288, 480, 64, 64})));
+	m_objects.push_back(pair<string, GameObject*>("player", new PlatformPlayer({0, 0, 128, 128
+		}, {299, 480, 64, 64})));
 }
 
 void GameState::Update()
@@ -114,6 +114,7 @@ void GameState::Update()
 	PlatformPlayer* pObj = static_cast<PlatformPlayer*>(GetGo("player"));
 	SDL_FRect* pBound = pObj->GetDst();
 	TiledLevel* pLevel = static_cast<TiledLevel*>(GetGo("level"));
+
 	for (unsigned int i = 0; i < pLevel->GetObstacles().size(); i++)
 	{
 		SDL_FRect* pTile = pLevel->GetObstacles()[i]->GetDst();

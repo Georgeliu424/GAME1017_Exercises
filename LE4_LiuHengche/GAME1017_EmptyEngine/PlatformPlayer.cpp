@@ -1,4 +1,4 @@
-#include "PlatformPlayer.h"
+#include"PlatformPlayer.h"
 #include"EventManager.h"
 #include"TextureManager.h"
 #include<cmath>
@@ -6,9 +6,10 @@
 
 PlatformPlayer::PlatformPlayer(SDL_Rect s, SDL_FRect d):AnimatedSpriteObject(s,d),
 	m_state(STATE_JUMPING),m_isGrounded(false),m_isFacingLeft(false),
-	m_maxVelX(9.0), m_maxVelY(JUMPFORCE),m_grav(GRAVITY),m_drag(0.85)
+	m_maxVelX(10.0), m_maxVelY(JUMPFORCE),m_grav(GRAVITY),m_drag(0.8)
 {
 	m_accelX = m_accelY = m_velX = m_velY = 0.0;
+	SetAnimation(1, 8, 9);
 }
 
 void PlatformPlayer::Update()
@@ -19,55 +20,58 @@ void PlatformPlayer::Update()
 		if (EVMA::KeyPressed(SDL_SCANCODE_A)||EVMA::KeyPressed(SDL_SCANCODE_D))
 		{
 			m_state = STATE_RUNNING;
+			SetAnimation(3, 0, 8, 256);
 		}
 		else if (EVMA::KeyPressed(SDL_SCANCODE_SPACE) && m_isGrounded)
 		{
 			m_accelY = -JUMPFORCE;
 			m_isGrounded = false;
 			m_state = STATE_JUMPING;
-			//SetAnimation(?,?,?,?);
+			SetAnimation(1, 8, 9, 256);
 		}
 		
 
 		break;
 	case STATE_RUNNING:
 
-
-		if (EVMA::KeyHeld(SDL_SCANCODE_A))
+		if (EVMA::KeyHeld(SDL_SCANCODE_A) && m_dst.x > 0)
 		{
 			m_accelX = -1.5;
 			if (!m_isFacingLeft)
 				m_isFacingLeft = true;
 		}
 
-		else if (EVMA::KeyHeld(SDL_SCANCODE_D))
+		else if (EVMA::KeyHeld(SDL_SCANCODE_D) && m_dst.x < WIDTH - m_dst.w)
 		{
-			m_accelY = 1.5;
+			m_accelX = 1.5;
 			if (!m_isFacingLeft)
 				m_isFacingLeft = false;
 		}
 
 
-		if (!EVMA::KeyHeld(SDL_SCANCODE_A)&&!EVMA::KeyHeld(SDL_SCANCODE_D))
+		if (EVMA::KeyPressed(SDL_SCANCODE_SPACE) && m_isGrounded)
+		{
+			m_accelY = -JUMPFORCE;
+			m_isGrounded = false;
+			m_state = STATE_JUMPING;
+			SetAnimation(1, 8, 9, 256);
+		}
+		if (!EVMA::KeyHeld(SDL_SCANCODE_A) && !EVMA::KeyHeld(SDL_SCANCODE_D))
 		{
 			m_state = STATE_IDLING;
-			//SetAnimation(?,?,?,);
+			SetAnimation(1, 0, 1, 256);
 
 		}
 
-
-
-
-
 		break;
 	case STATE_JUMPING:
-		if (EVMA::KeyHeld(SDL_SCANCODE_A))
+		if (EVMA::KeyHeld(SDL_SCANCODE_A) && m_dst.x > 0)
 		{
 			m_accelX = -1.5;
 			if (!m_isFacingLeft)
 			m_isFacingLeft = true;
 		}
-		else if (EVMA::KeyHeld(SDL_SCANCODE_D))
+		else if (EVMA::KeyHeld(SDL_SCANCODE_D) && m_dst.x < WIDTH - m_dst.w)
 		{
 			m_accelY = 1.5;
 			if(!m_isFacingLeft)
@@ -77,6 +81,7 @@ void PlatformPlayer::Update()
 		if (m_isGrounded)
 		{
 			m_state = STATE_RUNNING;
+			SetAnimation(3, 0, 8, 256);
 		}
 
 		break;
@@ -85,30 +90,27 @@ void PlatformPlayer::Update()
 	m_velX += m_accelX;
 	m_velX *= (m_isGrounded ? m_drag : 1.0);
 	m_velX = std::min(std::max(m_velX, -m_maxVelX),m_maxVelX );
-	m_velX += (float)m_velX;
-
-
-	//wrap player on-screen 
-
+	m_dst.x += m_velX;
 
 
 	m_velY += m_accelY + m_grav;
 	m_velY = std::min(std::max(m_velY, -m_maxVelY), m_maxVelY);
-	m_velY += (float)m_velY;
+	m_dst.y += m_velY;
 
 	m_accelX = m_accelY = 0.0;
+
+	Animate();
 
 }
 
 void PlatformPlayer::Render()
 {
-	SDL_RenderCopyExF(m_pRend, m_pText, GetSrcP(), GetDstP(), m_angle, 0, static_cast<SDL_RendererFlip>(m_dir));
+	SDL_RenderCopyExF(Engine::Instance().GetRenderer(), TEMA::GetTexture("player"), &m_src, &m_dst, 0.0, NULL, SDL_FLIP_NONE);
 }
-
 void PlatformPlayer::Stop()
 {
-	StopX();
-	StopY();
+		StopX();
+		StopY();
 }
 
 void PlatformPlayer::StopX() { m_velX = 0.0; }
