@@ -13,7 +13,7 @@ void Sprite::Render()
 
 
 
-Box::Box(const SDL_Point p, bool makeSprite = false, const SDL_Rect r ,
+Box::Box(const SDL_Point p, bool makeSprite , const SDL_Rect r ,
 	const SDL_Color c ):m_pos(p),m_pSprite(nullptr)//note r and c are for Sprite
 {
 	if (makeSprite)
@@ -38,9 +38,9 @@ Box* Box::Clone()
 
 void Box::Update()
 {
+	m_pos.x = SCROLLSPEED;
 	if (m_pSprite != nullptr)
 	{
-		m_pos.x = SCROLLSPEED;
 		m_pSprite->m_dst.x = m_pos.x;
 	}
 }

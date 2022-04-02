@@ -1,5 +1,8 @@
 ﻿  Box.cpp
   Engine.cpp
+C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE5_LiuHengche\GAME1017_Template_W01\Engine.cpp(104,25): warning C4838: 从“int”转换到“Uint8”需要收缩转换
+C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE5_LiuHengche\GAME1017_Template_W01\Engine.cpp(104,42): warning C4838: 从“int”转换到“Uint8”需要收缩转换
+C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE5_LiuHengche\GAME1017_Template_W01\Engine.cpp(104,62): warning C4838: 从“int”转换到“Uint8”需要收缩转换
   Main.cpp
-  Generating Code...
-  GAME1017_Template_W01.vcxproj -> D:\_\GAME1017_W09_Vector2D\Debug\GAME1017_Template_W01.exe
+  正在生成代码...
+  GAME1017_Template_W01.vcxproj -> C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE5_LiuHengche\Debug\GAME1017_Template_W01.exe
