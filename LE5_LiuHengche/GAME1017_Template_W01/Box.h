@@ -27,13 +27,12 @@ private:
 	Sprite* m_pSprite; // pointer to a dynamic sprite object(s)
 	int m_numSprites; // for bonus of A2
 public:
-		Box(const SDL_Point p, bool makeSprite = false, const SDL_Rect r = {0,0,0,0},
-			const SDL_Color c ={255,255,255,255});
-		~Box();
-		Box* Clone(); //we're making box also a prototype
-		void Update();
-		void Render(); 
-		const SDL_Point GetPos() { return m_pos; }
-
+	Box(const SDL_Point p, bool makeSprite = false, const SDL_Rect r = { 0,0,0,0 },
+		const SDL_Color c = { 255,255,255,255 });
+	~Box();
+	Box* Clone(); //we're making box also a prototype
+	void Update();
+	void Render(); 
+	const SDL_Point GetPos() { return m_pos; }
 };
 #endif

@@ -13,7 +13,7 @@ void Sprite::Render()
 
 
 
-Box::Box(const SDL_Point p, bool makeSprite , const SDL_Rect r ,
+Box::Box(const SDL_Point p, bool makeSprite , const SDL_Rect r,
 	const SDL_Color c ):m_pos(p),m_pSprite(nullptr)//note r and c are for Sprite
 {
 	if (makeSprite)
@@ -33,15 +33,18 @@ Box::~Box()
 
 Box* Box::Clone()
 {
-	return nullptr;
+	Box* clone = new Box(this->m_pos, false); // deep copy for brand new box object 
+	clone->m_pSprite = new Sprite(this->m_pSprite->m_dst, this->m_pSprite->m_color);
+	return clone;
 }
+
 
 void Box::Update()
 {
-	m_pos.x = SCROLLSPEED;
+	m_pos.x -= SCROLLSPEED;
 	if (m_pSprite != nullptr)
 	{
-		m_pSprite->m_dst.x = m_pos.x;
+		m_pSprite->m_dst.x -= SCROLLSPEED;
 	}
 }
 
@@ -55,7 +58,9 @@ void Box::Render()
 	//if we want to render a border around each box...
 	SDL_Rect dst = { m_pos.x, m_pos.y, 128, 128 };
 	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 156,230,200,255);
-	SDL_RenderFillRect(Engine::Instance().GetRenderer(), & dst);
+	SDL_RenderDrawRect(Engine::Instance().GetRenderer(), & dst);
 }
+
+
 
 
