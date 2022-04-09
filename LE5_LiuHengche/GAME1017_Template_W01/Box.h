@@ -6,7 +6,7 @@
 class Sprite // could be renamed Obstacle for A2
 {
 private:
-	//SDL_Rect m_src;for A2 or use GameObject.h
+	SDL_Rect m_src; //for A2 or use GameObject.h
 	SDL_Rect m_dst;
 	SDL_Color m_color;
 public:

@@ -124,6 +124,9 @@
     <ClInclude Include="Box.h" />
     <ClInclude Include="Engine.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="IMG\Obstacles.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
