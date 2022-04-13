@@ -2,24 +2,24 @@
 #include"Engine.h"
 #define SCROLLSPEED 2
 
-Sprite::Sprite():m_dst({0,0,0,0}),m_color({255,255,255,255}) {}
-Sprite::Sprite(const SDL_Rect r, const SDL_Color c):m_dst(r),m_color(c) {}
+Sprite::Sprite():m_dst({0,0,0,0}),m_src({255,255,255,255}) {}
+Sprite::Sprite(const SDL_Rect r, const SDL_Rect s):m_dst(r),m_src(s) {}
 
 void Sprite::Render()
 {
-	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), m_color.r, m_color.g, m_color.b, m_color.a);
-	SDL_RenderFillRect(Engine::Instance().GetRenderer(), &m_dst);
+	SDL_RenderCopy(Engine::Instance().GetRenderer(),
+		Engine::Instance().GetObstacleText(), &m_src, &m_dst);
 }
 
 
 
 Box::Box(const SDL_Point p, bool makeSprite , const SDL_Rect r,
-	const SDL_Color c ):m_pos(p),m_pSprite(nullptr)//note r and c are for Sprite
+	SDL_Rect s ):m_pos(p),m_pSprite(nullptr)//note r and c are for Sprite
 {
 	if (makeSprite)
 	{
-		//m_pSprite = new Sprite[m_numSprites];//For dynamic array
-		m_pSprite = new Sprite(r,c);
+		m_pSprite = new Sprite[m_numSprites];//For dynamic array
+		m_pSprite = new Sprite(r,s);
 	}
 }
 
@@ -34,7 +34,7 @@ Box::~Box()
 Box* Box::Clone()
 {
 	Box* clone = new Box(this->m_pos, false); // deep copy for brand new box object 
-	clone->m_pSprite = new Sprite(this->m_pSprite->m_dst, this->m_pSprite->m_color);
+	clone->m_pSprite = new Sprite(this->m_pSprite->m_dst, this->m_pSprite->m_src);
 	return clone;
 }
 

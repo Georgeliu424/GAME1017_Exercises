@@ -1,4 +1,2 @@
-﻿  PlatformPlayer.cpp
-C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE4_LiuHengche\GAME1017_EmptyEngine\PlatformPlayer.cpp(93,13): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
-C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE4_LiuHengche\GAME1017_EmptyEngine\PlatformPlayer.cpp(98,13): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
+﻿  States.cpp
   GAME1017_EmptyEngine.vcxproj -> C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE4_LiuHengche\Debug\GAME1017_EmptyEngine.exe

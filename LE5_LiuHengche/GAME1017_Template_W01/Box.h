@@ -8,10 +8,10 @@ class Sprite // could be renamed Obstacle for A2
 private:
 	SDL_Rect m_src; //for A2 or use GameObject.h
 	SDL_Rect m_dst;
-	SDL_Color m_color;
+
 public:
 	Sprite(); // If you have a dynamic array of sprite
-	Sprite(const SDL_Rect r, const SDL_Color c);
+	Sprite(const SDL_Rect r, const SDL_Rect s);
 	//void Update();// may need for A2, e.g.spinning blade
 	void Render();
 	friend class Box; //Alternately you can make a setter for m_dst
@@ -28,7 +28,7 @@ private:
 	int m_numSprites; // for bonus of A2
 public:
 	Box(const SDL_Point p, bool makeSprite = false, const SDL_Rect r = { 0,0,0,0 },
-		const SDL_Color c = { 255,255,255,255 });
+		const SDL_Rect s = { 0,0,0,0 });
 	~Box();
 	Box* Clone(); //we're making box also a prototype
 	void Update();

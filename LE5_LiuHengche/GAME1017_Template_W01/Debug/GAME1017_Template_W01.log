@@ -1,1 +1,5 @@
-﻿  GAME1017_Template_W01.vcxproj -> C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE5_LiuHengche\Debug\GAME1017_Template_W01.exe
+﻿  Engine.cpp
+C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE5_LiuHengche\GAME1017_Template_W01\Engine.cpp(112,26): warning C4838: 从“int”转换到“Uint8”需要收缩转换
+C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE5_LiuHengche\GAME1017_Template_W01\Engine.cpp(112,44): warning C4838: 从“int”转换到“Uint8”需要收缩转换
+C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE5_LiuHengche\GAME1017_Template_W01\Engine.cpp(112,64): warning C4838: 从“int”转换到“Uint8”需要收缩转换
+  GAME1017_Template_W01.vcxproj -> C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE5_LiuHengche\Debug\GAME1017_Template_W01.exe

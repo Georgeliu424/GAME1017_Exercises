@@ -20,14 +20,14 @@ void PlatformPlayer::Update()
 		if (EVMA::KeyPressed(SDL_SCANCODE_A)||EVMA::KeyPressed(SDL_SCANCODE_D))
 		{
 			m_state = STATE_RUNNING;
-			SetAnimation(3, 0, 8, 256);
+			SetAnimation(2, 0, 9, 10);
 		}
 		else if (EVMA::KeyPressed(SDL_SCANCODE_SPACE) && m_isGrounded)
 		{
 			m_accelY = -JUMPFORCE;
 			m_isGrounded = false;
 			m_state = STATE_JUMPING;
-			SetAnimation(1, 8, 9, 256);
+			SetAnimation(2, 8, 9, 10);
 		}
 		
 
@@ -54,12 +54,12 @@ void PlatformPlayer::Update()
 			m_accelY = -JUMPFORCE;
 			m_isGrounded = false;
 			m_state = STATE_JUMPING;
-			SetAnimation(1, 8, 9, 256);
+			SetAnimation(1, 8, 9, 10);
 		}
 		if (!EVMA::KeyHeld(SDL_SCANCODE_A) && !EVMA::KeyHeld(SDL_SCANCODE_D))
 		{
 			m_state = STATE_IDLING;
-			SetAnimation(1, 0, 1, 256);
+			SetAnimation(1, 0, 1, 10);
 
 		}
 
@@ -81,7 +81,7 @@ void PlatformPlayer::Update()
 		if (m_isGrounded)
 		{
 			m_state = STATE_RUNNING;
-			SetAnimation(3, 0, 8, 256);
+			SetAnimation(3, 0, 8, 10);
 		}
 
 		break;

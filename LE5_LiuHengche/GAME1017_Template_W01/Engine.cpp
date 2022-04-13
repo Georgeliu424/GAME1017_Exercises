@@ -22,7 +22,10 @@ bool Engine::Init(const char* title, int xpos, int ypos, int width, int height, 
 			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 			if (m_pRenderer != nullptr) // Renderer init success.
 			{
-				// Nothing needed right now.
+				if (IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) != 0)
+				{
+					m_pObstacles= IMG_LoadTexture(m_pRenderer, "IMG/Obstacles.png");
+				}
 			}
 			else return false; // Renderer init fail.
 		}
@@ -38,10 +41,10 @@ bool Engine::Init(const char* title, int xpos, int ypos, int width, int height, 
 	for (int i = 0; i < 9; i++)
 		m_vec.push_back(new Box({ 128 * i,384 }));
 	// create the map of Boxes with sprites
-	m_protos.emplace("saw", new Box({ 1024,384 }, true, { 1024, 384, 128, 128 }, {255, 64, 128, 255 }));
-	m_protos.emplace("spike_wall", new Box({ 1024,384 }, true, { 1056, 0, 64, 384 }, {64, 255, 32, 255 }));
-	m_protos.emplace("spike_lg", new Box({ 1024,384 }, true, { 1024, 448, 128, 64 }, { 234, 215, 84, 255 }));
-	m_protos.emplace("spike_sm", new Box({ 1024,384 }, true, { 1056, 480, 64, 32 }, { 16, 186, 252, 255 }));
+	/*m_protos.emplace("Spikes", new Box({ 1024,384 }, true, { 1024, 448, 128, 64 }, { 128, 64, 128, 64 }));*/
+	m_protos.emplace("spike_wall", new Box({ 1024,384 }, true, { 1024,0,128,448 }, { 0,0,128,448 }));
+	/*m_protos.emplace("Circular", new Box({ 1024,384 }, true, { 1024, 448, 128,128 }, { 128,128,128,128 }));*/
+
 	// Set the gap properties
 	m_gapCtr = 0;
 	m_gapMax = 3;
@@ -107,7 +110,7 @@ void Engine::Update()
 		if (m_gapCtr++ % m_gapMax == 0) // create Box with Sprite. 
 		{
 			SDL_Color col = { 100 + rand()%156 ,100 + rand() % 156 ,100 + rand() % 156 ,255};
-			m_vec.push_back(m_protos[m_keys[rand() % 4]]->Clone()); // instead of this pick a random clone from map of box*
+			m_vec.push_back(m_protos[m_keys[1]]->Clone()); // instead of this pick a random clone from map of box*
 		}
 		else m_vec.push_back( new Box({ 1024,384 })); 
 			
@@ -138,9 +141,11 @@ void Engine::Clean()
 	}
 	m_vec.clear();
 	m_vec.shrink_to_fit(); //Optional
+	SDL_DestroyTexture(m_pObstacles);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_DestroyWindow(m_pWindow);
 	SDL_Quit();
+	IMG_Quit();
 }
 
 int Engine::Run()

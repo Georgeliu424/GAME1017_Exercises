@@ -1,2 +1,16 @@
-﻿  States.cpp
+﻿  AsteroidSprites.cpp
+  Button3.cpp
+  CollisionManager.cpp
+  Engine.cpp
+  EventManager.cpp
+  Main.cpp
+  MathManager.cpp
+  Primitives.cpp
+  SoundManager.cpp
+  StateManager.cpp
+  States.cpp
+  TextureManager.cpp
+  TiledLevel.cpp
+  正在生成代码...
+C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE3_LiuHengche\GAME1017_EmptyEngine\AsteroidSprites.cpp(54): warning C4172: 返回局部变量或临时变量的地址: mods
   GAME1017_EmptyEngine.vcxproj -> C:\Users\User\source\repos\Game1017\GAME1017_Exercises\LE3_LiuHengche\Debug\GAME1017_EmptyEngine.exe
